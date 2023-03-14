@@ -10,7 +10,7 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "planet")
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Planet extends EntityTable {
+public class Planet {
     @Id
     String id;
     @Column(name = "name")

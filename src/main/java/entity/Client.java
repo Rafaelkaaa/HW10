@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 @Table(name = "client")
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Client extends EntityTable {
+public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;

@@ -4,9 +4,6 @@ import entity.Client;
 
 
 public class ClientCrudService extends CrudService {
-    public ClientCrudService() {
-        CrudService.clas = Client.class;
-    }
 
     public void add(String name) {
         init();
@@ -17,6 +14,6 @@ public class ClientCrudService extends CrudService {
     }
 
     public void delete(long id) {
-        deleteRow(id);
+        deleteRow(id, new Client());
     }
 }
