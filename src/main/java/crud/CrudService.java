@@ -6,9 +6,9 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.id.IdentifierGenerationException;
 import util.HibernateUtil;
 
-public class CrudService {
+public class CrudService <T> {
 
-    static Class clas;
+    Class<T> clazz;
     Session session;
     Transaction transaction;
     void init() {
@@ -27,9 +27,9 @@ public class CrudService {
         }
     }
 
-    <T> void deleteRow(Object id, T object) {
+    void deleteRow(Object id) {
         init();
-        Object entity = session.find(object.getClass(), id);
+        T entity = session.find(clazz, id);
         transaction = session.beginTransaction();
         session.remove(entity);
         end();
