@@ -4,12 +4,12 @@ package crud;
 import entity.Client;
 import entity.Planet;
 
-public class PlanetCrudService extends CrudService{
-
+public class PlanetCrudService extends CrudService {
     public PlanetCrudService() {
         clazz = Planet.class;
     }
 
+    @Override
     public void add(String id, String name) {
         init();
         Planet planet = new Planet();
@@ -18,10 +18,4 @@ public class PlanetCrudService extends CrudService{
         persist(planet);
         end();
     }
-
-    public void delete(String id) {
-      deleteRow(id);
-    }
-
-
 }

@@ -8,10 +8,14 @@ import java.sql.Timestamp;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
-public class TicketCrudService extends CrudService{
+public class TicketCrudService extends CrudService {
 
+    public TicketCrudService() {
+        clazz = Ticket.class;
+    }
 
-    public void add( String fromId, String toId, long clientId) {
+    @Override
+    public void add(String fromId, String toId, long clientId) {
         init();
         Ticket ticket = new Ticket();
 
@@ -35,19 +39,17 @@ public class TicketCrudService extends CrudService{
     }
 
     private void validator(Object object, String nameParameter) {
-        if (object == null){
+        if (object == null) {
             throw new IllegalArgumentException
                     ("Entered non-existent " + nameParameter +
                             " , create new row or enter another " + nameParameter);
         }
     }
 
-    public  Ticket getByID(long id){
+    public Ticket getByID(long id) {
         init();
-       Ticket ticket = session.find(Ticket.class, id);
-       session.close();
-       return ticket;
+        Ticket ticket = session.find(Ticket.class, id);
+        session.close();
+        return ticket;
     }
-
-
 }

@@ -6,37 +6,48 @@ import org.hibernate.exception.ConstraintViolationException;
 import org.hibernate.id.IdentifierGenerationException;
 import util.HibernateUtil;
 
-public class CrudService <T> {
-
+public abstract class CrudService<T> {
     Class<T> clazz;
     Session session;
     Transaction transaction;
+
     void init() {
         session = HibernateUtil.getInstance().getSessionFactory().openSession();
     }
+
     void persist(Object entity) {
         try {
             transaction = session.beginTransaction();
             session.persist(entity);
-        }catch (IllegalArgumentException ex){
+        } catch (IllegalArgumentException ex) {
             System.out.println("Entered invalid value");
-        }catch (IdentifierGenerationException ex){
+        } catch (IdentifierGenerationException ex) {
             System.out.println("Field id can't be null");
-        }catch (ConstraintViolationException ex){
+        } catch (ConstraintViolationException ex) {
             System.out.println("Entered not unique value in field id");
         }
     }
 
-    void deleteRow(Object id) {
+    public void delete(Object id) {
         init();
-        T entity = session.find(clazz, id);
+        T entity;
+        entity = session.find(clazz, id);
         transaction = session.beginTransaction();
         session.remove(entity);
         end();
     }
 
-    void end(){
+    void end() {
         transaction.commit();
         session.close();
+    }
+
+    public void add(String name) {
+    }
+
+    public void add(String id, String name) {
+    }
+
+    public void add(String fromId, String toId, long clientId) {
     }
 }
