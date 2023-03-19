@@ -8,10 +8,10 @@ import util.HibernateUtil;
 
 public abstract class CrudService<T> {
     Class<T> clazz;
-    Session session;
+    public Session session;
     Transaction transaction;
 
-    void init() {
+    public void init() {
         session = HibernateUtil.getInstance().getSessionFactory().openSession();
     }
 
